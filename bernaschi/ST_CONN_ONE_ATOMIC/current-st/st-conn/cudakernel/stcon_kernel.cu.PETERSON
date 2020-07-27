@@ -1,0 +1,654 @@
+/* This is to make PRId64 working with c++ compiler */
+#ifdef __cplusplus
+#define __STDC_FORMAT_MACROS
+#endif
+/* header of int64_t and PRId64 */
+#include <inttypes.h>
+#include <stdio.h>
+#include <assert.h>
+#include <cuda.h>
+#include "header.h"
+#include "defines.h"
+#include "mykernels.h"
+
+/*
+ST-CON DEVICE FUNCTION
+ */
+__device__ INT32_T vertex_2_local(INT_T x, int lgsize){
+    INT32_T color[2] = {0, COLOR_MASK};
+    INT32_T y = (INT32_T)(DIV_SIZE(x));
+    return y | color[((x & COLOR_MASK_64) == COLOR_MASK_64)];
+}
+
+__device__ int set_blue_mask32(int x){
+  /*
+mask:  (msb)1000...0000 |
+xval:  (msb)0101...1010 
+---------------------
+       (msb)1101...1010
+*/
+        return (x | COLOR_MASK);
+}
+
+__device__ int set_red_mask32(int x){
+  /*
+mask:  (msb)1000...0000 
+
+!mask  (msb)0111...1111 &
+xval:  (msb)0101...1010 
+---------------------
+       (msb)0101...1010
+
+*/
+  return (x & (~COLOR_MASK));
+}
+
+
+__device__ int isblue(int x){
+    return (x & COLOR_MASK) == COLOR_MASK;
+}
+
+__device__ int isblue_64(INT_T x){
+
+  return (x & COLOR_MASK_64) == COLOR_MASK_64;
+}
+
+__device__ INT_T st_binsearch(INT_T *cells_i4, INT_T ci4, INT_T ncells)
+{
+  INT_T min = 0;
+  INT_T max = ncells-1;
+  INT_T mid =(ncells-1) >> 1;
+
+  while(min <= max)
+  {
+    if (cells_i4[mid] == ci4) return mid;
+    if (cells_i4[mid] < ci4) min = mid+1;
+    else max = mid-1;
+
+    mid = (max + min) >> 1;
+  }
+  return mid;
+}
+
+__device__ INT_T st_binsearch_duplicates(INT_T *cells_i4, INT_T ci4, INT_T ncells)
+{
+  INT_T min = 0;
+  INT_T max = ncells-1;
+  INT_T mid = (max + min) >> 1;
+
+  while(min <= max)
+  {
+    if (cells_i4[mid] == ci4) break; //return mid;
+    if (cells_i4[mid] < ci4) min = mid+1;
+    else max = mid-1;
+
+    mid = (max + min) >> 1;
+  }
+  //If there are duplicates get the highest index
+  while (mid < max && cells_i4[mid+1]==cells_i4[mid]){
+	  mid++;
+  }
+
+      return mid;
+}
+
+//ATOMIC_T is defined in make_bfs_func.c before the inclusion of this file
+__global__ void	k_stcon_make_queue_deg(INT_T *d_queue, INT_T queue_count,
+				 INT_T *d_queue_off, INT_T *d_queue_deg, 
+				 INT_T *dg_off, INT_T nverts, 
+				 int rank, int size, int lgsize)
+{
+	unsigned int  tid = threadIdx.x;
+	unsigned int  grid_sz = gridDim.x*blockDim.x;
+	unsigned int  gid = blockIdx.x*blockDim.x + tid;
+
+	INT_T U, dq;
+
+	while (gid < queue_count)
+	{
+		dq = d_queue[gid] & (~COLOR_MASK_64);
+		//Vertices in d_queue are already LOCAL
+		U = 2 * dq; //(d_queue[gid] & (~COLOR_MASK_64));
+		d_queue_off[gid] = dg_off[U];
+		d_queue_deg[gid] = dg_off[U+1] - dg_off[U];
+
+		gid += grid_sz; 
+	}
+}
+
+__global__ void k_stcon_owner(INT_T* d_sendbuff, INT_T M,
+			    INT_T* d_mask_1, INT_T* d_mask_2,
+			    int rank, int size, int lgsize)
+{
+	unsigned int tid 	 = threadIdx.x;
+	unsigned int grid_sz = gridDim.x*blockDim.x;
+	unsigned int gid 	 = blockIdx.x*blockDim.x + tid;
+	int owner;
+	INT_T temp;
+
+	while (gid < M) {
+		temp = d_sendbuff[gid]  & (~COLOR_MASK_64); // Remove the color from the vertex
+		owner = VERTEX_OWNER(temp);
+		d_mask_1[gid] = owner;
+		d_mask_2[gid] = gid;
+		gid += grid_sz;
+	}
+}
+
+//devo anche passare d_pred 
+//node_rank_1 =  rank (aka rank of d_queue[i])
+//node_rank_2 = d_pred[unique_edges[V_label_pointer]]
+__device__ int global_lock_blue_r = 0;
+__device__ int global_lock_red_r  = 0;
+__global__ void k_stcon_binary_mask_unique_large(INT_T next_level_vertices, INT_T *dg_edges,
+                                  INT_T *d_queue, INT_T *d_next_off,
+                                  INT_T *d_queue_off, INT_T queue_count,
+                                  INT_T *d_send_buff,
+                                  INT32_T *d_bitmask_pedges, INT32_T *d_mask,
+                                  int rank, int size, int lgsize,
+                                  SHORT_INT *d_cared, SHORT_INT *d_cablue, SHORT_INT *d_turn, INT_T *d_st,
+                                  INT_T *d_st_rank, INT_T *d_pred, INT_T *d_unique_edges, INT32_T* d_mn_found, SHORT_INT *global_lock_red, SHORT_INT *global_lock_blue)
+{
+    
+
+
+     unsigned int  tid = threadIdx.x;
+     unsigned int  grid_sz = gridDim.x*blockDim.x;
+     unsigned int  gid = blockIdx.x*blockDim.x + tid;
+     INT_T i, newidx;
+     INT_T V, off_V, V_blue;
+     INT32_T V_label_pointer;
+     INT_T parent_vertex, parent_vertex_color; //needed to store (in case) two partent with different color (exit condiction)
+     INT32_T V_parent, V_parent_color, V_parent_blue;
+     uint count_busy_wait = 0;
+     uint count_busy_wait_b = 0;
+     while (gid < next_level_vertices) {
+		 if (queue_count == 1) i = 0;
+		 else{
+			 i = st_binsearch(d_next_off, gid, queue_count);
+		 }
+		 newidx  = gid - d_next_off[i];
+		 off_V   = d_queue_off[i] + newidx;
+		 V_label_pointer = d_bitmask_pedges[off_V];
+
+		 V = dg_edges[off_V];
+		 V_blue =  dg_edges[off_V] | COLOR_MASK_64;
+		 // Check the bitmask
+		 parent_vertex = d_queue[i] & (~COLOR_MASK_64); //controllato ok
+		 parent_vertex_color = d_queue[i] & (COLOR_MASK_64); //controllato ok
+
+		 V_parent = (INT32_T)parent_vertex;
+		 V_parent_blue = V_parent | COLOR_MASK;
+
+		 if (parent_vertex_color == 0){  // red path
+                    if (atomicCAS(&global_lock_red[V_label_pointer], 0, 1) == 0){
+                         d_turn[V_label_pointer] = 1; // meaning blue
+                         d_cared[V_label_pointer] = 1;
+                    }
+                         while(d_cablue[V_label_pointer] == 1 && d_turn[V_label_pointer] == 1) {
+				     count_busy_wait++;
+				 // printf("*");
+			 }
+			 /* critical section*/
+			 V_parent_color = (d_mask[V_label_pointer] & COLOR_MASK);
+                         old == atomicCAS(&d_mask[V_label_pointer], NO_PREDECESSOR,(int) d_queue[i]);
+                         
+
+
+			 if (NO_PREDECESSOR == d_mask[V_label_pointer]) {
+				 d_mask[V_label_pointer] = V_parent; //(INT32_T)d_queue[i];// update the mask with the pred and its color
+				 //V = dg_edges[off_V]; // This vertex is GLOBAL
+				 d_send_buff[V_label_pointer] = V ; // means V | RED_COLOR_MASK but RED_COLOR_MASK is 0
+			 }
+			 else if (COLOR_MASK == V_parent_color) {
+			 //else if ((d_mask[V_label_pointer] & COLOR_MASK) == COLOR_MASK) {
+				 //exit with parent_vertex and V_partent (may have other rank if the pred is remote)
+				 //printf("ESCO FIND MATCHING NODE(red) %ld \n",dg_edges[off_V]);
+				 //d_st[4] = d_queue[i]; //current predecessor in queue
+				 //d_st[1] = dg_edges[off_V]; // THIS VERTEX IS GLOBAL
+				 //d_st[2] = d_mask[V_label_pointer]; // dovrebbe essere colorato di blue d_mask
+
+				 if (atomicCAS(d_mn_found, 0, 1) == 0) {
+					 d_st_rank[0] = rank; //rank of d_queue[i] red
+					 if (NO_PREDECESSOR ==  d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])] ) d_st_rank[1] = rank; //d_pred is not yet updated becouse mn is found in the same bfs lev.
+					 else d_st_rank[1] = d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])] & (~COLOR_MASK_64); //rank of pred blue
+					 d_st_rank[2] = V; //dg_edges[off_V];
+					 d_st_rank[3] = V; //dg_edges[off_V];
+					 d_st_rank[4] = V_parent; //d_queue[i];
+					 d_st_rank[5] = (d_mask[V_label_pointer] & (~COLOR_MASK)); // | COLOR_MASK_64; //va convertito a 64 bit il colore anche sotto
+				 }
+			 }
+			  /*end critical section*/
+			 d_cared[V_label_pointer] = 0;
+                         global_lock_red[V_label_pointer] = 0;
+		 }
+		 else
+		 { //blue path
+                         if (atomicCAS(&global_lock_blue[V_label_pointer], 0, 1) == 0) {
+                             d_turn[V_label_pointer] = 0;
+			     d_cablue[V_label_pointer] = 1;
+			     
+                         }
+			 while (d_cared[V_label_pointer] == 1 && d_turn[V_label_pointer] == 0)  {
+				 count_busy_wait_b++;
+				 //printf("#");
+
+			 }
+                         global_lock_blue[V_label_pointer] = 1;
+			 // critical section
+			 V_parent_color = (d_mask[V_label_pointer] & COLOR_MASK);
+			 if (NO_PREDECESSOR == d_mask[V_label_pointer]) {
+				 d_mask[V_label_pointer] = V_parent_blue; //((INT_T)d_queue[i]) | COLOR_MASK; //update the mask with the pred and its color !!!!!!!!!!!!!!!
+				 //V = dg_edges[off_V]; // This vertex is GLOBAL
+				 d_send_buff[V_label_pointer] = V_blue; // | COLOR_MASK_64; // means V | RED_COLOR_MASK but RED_COLOR_MASK is 0
+				 //printf("BLUE ----> visiting node %ld - parent %ld with color %ld d_queue %ld\n", V, parent_vertex, parent_vertex_color, d_queue[i]);
+				 //d_send_buff[V_label_pointer] = d_send_buff[V_label_pointer] | COLOR_MASK_64;
+
+			 }
+			 else if (0 == V_parent_color) { // Means it is RED
+			 //else if ((d_mask[V_label_pointer] & COLOR_MASK) == 0) {
+				 //exit with parent_vertex and V_partent (may have other rank if the pred is remote)
+				 //printf("ESCO FIND MATCHING NODE(blue) %ld \n",dg_edges[off_V]);
+				 //d_st[0] = d_mask[V_label_pointer]; // dovrebbe essere colorato di red
+				 //d_st[1] = dg_edges[off_V];
+				 //d_st[2] = d_queue[i]; //current predecessor in queue
+
+				 if (atomicCAS(d_mn_found, 0, 1) == 0) {
+					 if (NO_PREDECESSOR == d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])]) d_st_rank[0] = rank; //d_pred is not yet updated becouse mn is found in the same bfs lev
+					 else d_st_rank[0] = d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])] & (~COLOR_MASK_64) ; //rank of pred red
+					 d_st_rank[1] = rank; //rank of d_queue[i] blue
+					 d_st_rank[2] = V; //dg_edges[off_V];
+					 d_st_rank[3] = V; //dg_edges[off_V];
+					 d_st_rank[4] = (INT_T)(d_mask[V_label_pointer] & (~COLOR_MASK));
+					 d_st_rank[5] = V_parent; //d_queue[i];
+				 }
+			 }
+			 //end critical section
+			 d_cablue[V_label_pointer] = 0;
+                         global_lock_blue[V_label_pointer] = 0;
+		 }
+
+		 gid += grid_sz;
+   } // End While gid
+
+
+	/*
+       unsigned int  tid = threadIdx.x;
+       unsigned int  grid_sz = gridDim.x*blockDim.x;
+       unsigned int  gid = blockIdx.x*blockDim.x + tid;
+       INT_T i, newidx;
+       INT_T V, off_V, new_V_64;
+       INT32_T V_label_pointer, new_V_32;
+       INT_T parent_vertex_color; //needed to store (in case) two partent with different color (exit condiction)
+       //INT_T parent_vertex;
+       //INT32_T V_parent_color; //V_parent,
+       uint count_busy_wait = 0;
+       uint count_busy_wait_b = 0;
+
+      // INT_T color_64[2] = {0, COLOR_MASK_64};
+      //  int ci = 0;
+	  while (gid < next_level_vertices) {
+			if (queue_count == 1) i = 0;
+			else{
+				i = st_binsearch(d_next_off, gid, queue_count);
+			}
+			newidx  = gid - d_next_off[i];
+			off_V   = d_queue_off[i] + newidx;
+			V_label_pointer = d_bitmask_pedges[off_V];
+			// Check the bitmask
+			//parent_vertex = d_queue[i] & (~COLOR_MASK_64); //controllato ok
+
+			parent_vertex_color = d_queue[i] & (COLOR_MASK_64); //controllato ok
+
+			//inizializzare V_parent_color
+			//V_parent = d_mask[V_label_pointer] & (~COLOR_MASK); //32bit color mask
+			//V_parent_color = d_mask[V_label_pointer] & COLOR_MASK; //ancora non sai se e' stato visitato
+
+			if (parent_vertex_color == 0){  // red path
+				d_cared[V_label_pointer] = 1;
+				d_turn[V_label_pointer] = 1; // meaning blue
+				while((d_cablue[V_label_pointer] == 1) && (d_turn[V_label_pointer] == 1)){
+					count_busy_wait++;
+					//printf("*");
+				}
+				// critical section
+				if (NO_PREDECESSOR == d_mask[V_label_pointer]) {
+					d_mask[V_label_pointer] = (INT32_T)d_queue[i];// update the mask with the pred and its color
+					V = dg_edges[off_V]; // This vertex is GLOBAL
+					d_send_buff[V_label_pointer] = V ; // means V | RED_COLOR_MASK but RED_COLOR_MASK is 0
+					//printf( "RED ----> visiting node %ld - parent %ld with color %ld\n", V, parent_vertex, parent_vertex_color);
+				}
+
+				else if ((d_mask[V_label_pointer] & COLOR_MASK) == COLOR_MASK){    // (V_parent_color == COLOR_MASK){
+					//exit with parent_vertex and V_partent (may have other rank if the pred is remote)
+					//printf( "ESCO FIND MATCHING NODE(red) %ld \n",dg_edges[off_V]);
+					//d_st[4] = d_queue[i]; //current predecessor in queue
+					//d_st[1] = dg_edges[off_V]; // THIS VERTEX IS GLOBAL
+					//d_st[2] = d_mask[V_label_pointer]; // dovrebbe essere colorato di blue d_mask
+
+					// FOUND MATCHING NODE
+					if (atomicCAS(d_mn_found, 0, 1) == 0) { // QUI HO UNA SEZIONE CRITICA
+						d_st_rank[0] = rank; //rank of d_queue[i] Rank of RED Predecessor
+						d_st_rank[1] = d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])] & (~COLOR_MASK_64); //Rank of BLUE Predecessor
+						if (d_st_rank[1] == NO_PREDECESSOR) d_st_rank[1] = rank; //d_pred is not yet updated becouse mn is found in the same bfs lev.
+						d_st_rank[2] = dg_edges[off_V];  // Matching NODE - GLOBAL VERTEX
+						d_st_rank[3] = dg_edges[off_V];  // Matching NODE - GLOBAL VERTEX
+						d_st_rank[4] = d_queue[i];       // RED Predecessor - LOCAL VERTEX
+						// PER ORA SALVIAMO I PREDECESSORI SENZA COLORE
+						d_st_rank[5] = (d_mask[V_label_pointer] & (~COLOR_MASK)); // BLUE Predecessor  - LOCAL VERTEX
+								// (d_mask[V_label_pointer] & (~COLOR_MASK)) | COLOR_MASK_64;  // BLUE Predecessor  - LOCAL VERTEX
+						//va convertito a 64 bit il colore anche sotto
+					} // FINE ULTERIORE SEZIONE CRITICA
+				}
+				 //end critical section
+				d_cared[V_label_pointer] = 0;
+			}
+			else{ //blue path
+				//printf("blue path\n");
+				d_cablue[V_label_pointer] = 1;
+				d_turn[V_label_pointer] = 0;
+				while ((d_cared[V_label_pointer] == 1) && d_turn[V_label_pointer] == 0){
+					count_busy_wait_b++;
+					//printf( "#");
+				}
+				// critical section
+				//printf( "entro qua -> %d color %d\n", d_mask[V_label_pointer], V_parent_color);
+				if (NO_PREDECESSOR == d_mask[V_label_pointer]) {
+//#? d_mask deve avere il colore ed e' a 32 bit ma d_queue e' a 64
+					// SINCE WE ARE IN THE BLUE PATH APPLY BLUE COLOR
+					new_V_64 = d_queue[i] & (~COLOR_MASK_64);
+					new_V_32 = (INT32_T) new_V_64;
+					d_mask[V_label_pointer] = new_V_32 | COLOR_MASK;
+					//d_mask[V_label_pointer] = ((INT32_T)(d_queue[i] & (~COLOR_MASK_64))) | COLOR_MASK; // First remove the color from the d_queue 64bits then add color at 32bits
+					V = dg_edges[off_V]; // This vertex is GLOBAL
+					d_send_buff[V_label_pointer] = V | COLOR_MASK_64; // means V | BLUE_COLOR_MASK
+					//printf( "BLUE ----> visiting node %ld - parent %ld with color %ld d_queue %ld\n", V, parent_vertex, parent_vertex_color, d_queue[i]);
+
+					if (d_send_buff[V_label_pointer] < 0)
+						printf( "BLUE ----> visiting node %ld - parent %ld with color %ld d_queue %ld\n", V, d_queue[i] & (~COLOR_MASK_64), parent_vertex_color, d_queue[i]);
+				}
+				else if ((d_mask[V_label_pointer] & COLOR_MASK) == 0) { // MEAN IT IS RED
+					//exit with parent_vertex and V_partent (may have other rank if the pred is remote)
+					//printf( "ESCO FIND MATCHING NODE(blue) %ld \n",dg_edges[off_V]);
+					//d_st[0] = d_mask[V_label_pointer]; // dovrebbe essere colorato di red
+					//d_st[1] = dg_edges[off_V];
+					//d_st[2] = d_queue[i]; //current predecessor in queue
+
+					// FOUND MATCHING NODE
+					if (atomicCAS(d_mn_found, 0, 1) == 0) { // QUI HO UNA SEZIONE CRITICA
+						d_st_rank[0] = d_pred[VERTEX_LOCAL(d_unique_edges[V_label_pointer])]; // Rank of RED Predecessor
+						if (d_st_rank[0] == NO_PREDECESSOR) d_st_rank[0] = rank; //d_pred is not yet updated becouse mn is found in the same bfs lev.
+						d_st_rank[1] = rank; // Current processor rank - Rank of BLUE Predecessor
+						d_st_rank[2] = dg_edges[off_V];  // Matching NODE - GLOBAL VERTEX
+						d_st_rank[3] = dg_edges[off_V];  // Matching NODE - GLOBAL VERTEX
+						d_st_rank[4] = (INT_T)d_mask[V_label_pointer]; // RED Predecessor  - LOCAL VERTEX
+						// PER ORA SALVIAMO I PREDECESSORI SENZA COLORE
+						d_st_rank[5] = d_queue[i]  & (~COLOR_MASK_64);  // BLUE Predecessor  - LOCAL VERTEX
+					} // FINE ULTERIORE SEZIONE CRITICA
+				}
+				//end critical section
+				d_cablue[V_label_pointer] = 0;
+			}
+
+			gid += grid_sz;
+	  } */
+}
+
+//bfs_back_kernel32
+__global__ void k_stcon_back_kernel32(INT_T *d_array, INT_T nelems, INT_T* d_idx, INT32_T *d_support,
+		                          int rank, int size, int lgsize)
+{
+	unsigned int tid 	= threadIdx.x;
+	unsigned int gid 	= blockDim.x*blockIdx.x + tid;
+	unsigned int grid_size 	= gridDim.x*blockDim.x;
+	INT_T idx;
+	INT32_T u0;
+
+	while (gid < nelems) {
+		idx = d_idx[gid];
+//		u0 = VERTEX_2_LOCAL(d_array[idx]); //la macro passa da 64 a 32
+        u0 = vertex_2_local(d_array[idx], lgsize) ;
+		d_support[gid] = u0;
+		gid += grid_size;
+	}
+}
+
+
+/*
+MODIFICA NO PETERSON 
+   */
+__global__ void k_stcon_dequeue_step_8_local(INT32_T* d_sendbuff, INT_T nlocal_verts, INT_T* d_newq, int64_t* d_pred, ATOMIC_T* global_count,
+                                       int rank, int size, int lgsize)
+{
+  unsigned int  tid = threadIdx.x;
+  unsigned int  grid_sz = gridDim.x*blockDim.x;
+  unsigned int  gid = blockIdx.x*blockDim.x + tid;
+
+  ATOMIC_T old_count = 0;
+  INT32_T VL;
+  INT32_T vertex;
+  INT_T vertex_color, new_vertex;
+  INT_T color[2] = {0, COLOR_MASK_64};
+  while (gid < nlocal_verts)
+  {
+    //Vertex is already LOCAL
+    VL = d_sendbuff[gid]; // new vertex is already LOCAL
+    
+    vertex = VL & (~COLOR_MASK);
+    //printf( "--------------> k_dequeue_step_8_local  ------ VL %d    vertex %d    d_pred[vertex] %ld\n", VL, vertex, d_pred[vertex]);
+
+    // estraggo il colore a 32bit e setto a 64bit 
+    vertex_color = color[((VL & COLOR_MASK) == COLOR_MASK)]; //uso il confronto a 32bit
+    if (d_pred[vertex] == NO_PREDECESSOR)
+    {
+      d_pred[vertex] = rank | vertex_color;/// <-  settare il colore vecchio qui pero' devi usare color_mask_64   // Store the rank of the processor that found the new vertex
+      old_count = atomicAdd((ATOMIC_T*)&global_count[0], 1);
+      //New queue contains LOCAL vertex.
+      //d_newq[old_count] = VL; // No change
+      new_vertex = (INT_T)vertex;
+      d_newq[old_count] = new_vertex | vertex_color;
+    }
+    gid += grid_sz;
+  }
+}
+
+//Parameter d_recv_offset_per_proc is used to determine rank of each parent edge and calculate GLOBAL vertex
+__global__ void k_stcon_dequeue_step_9_recv_1(INT32_T* d_recvbuff, INT_T recv_count, INT_T* d_recv_offset_per_proc,
+					                    INT_T* d_newq, int64_t* d_pred,
+					                    int rank, int size, int lgsize,
+					                    SHORT_INT *d_cared, SHORT_INT *d_cablue, SHORT_INT *d_turn, INT_T *d_st, INT_T *d_st_rank, INT32_T* d_mn_found)
+{
+	unsigned int  tid = threadIdx.x;
+	unsigned int  grid_sz = gridDim.x*blockDim.x;
+	unsigned int  gid = blockIdx.x*blockDim.x + tid;
+
+    INT_T  node_rank;
+    INT_T node_rank_1, node_rank_2; // questi sarranno global
+	INT32_T V, V_color;
+    //INT_T V_parent, V_parent_color;
+    uint count_busy_wait_a = 0;
+    uint count_busy_wait_b = 0;
+
+   /*
+Completare il while
+
+
+     */ 
+	//Usually U is the vertex and V is the parent, here they were swapped. Fixed it.
+	while (gid  < recv_count)
+	{
+		//Vertex in d_recvbuff is LOCAL
+		V = d_recvbuff[gid] & (~COLOR_MASK); //This is the new vertex already LOCAL
+		V_color = d_recvbuff[gid] & (COLOR_MASK);
+
+		//printf("rank-%d: rcv: %d(with color %d)  visited by? %ld - %ld\n", rank, V,   d_recvbuff[gid], d_pred[V], (d_pred[V] & (~COLOR_MASK_64)));
+                
+		//V_parent = d_pred[V];
+		/*
+		   qui peterson
+
+		*/
+		if (V_color == 0){ //red path
+                        if (atomicCAS(&global_lock_red_r, 0, 1) == 0){
+                            d_cared[V] = 1;
+                            d_turn[V] = 1;
+                        }
+			while((d_cablue[V] == 1) && (d_turn[V] == 1) ){
+				//busy wait
+				count_busy_wait_a++;
+			}
+			//critical section (red)
+			if (d_pred[V]  == NO_PREDECESSOR){  // WHEN TESTING AGAINST NO_PREDECESSOR NEVER USE COLOR_MASK
+			//if (( d_pred[V]  &  (~COLOR_MASK_64) ) == NO_PREDECESSOR){
+				d_pred[V] = TMP_PREDECESSOR;
+				//Calculate the node_rank of the received vertex using binary search
+				node_rank = st_binsearch_duplicates(d_recv_offset_per_proc, gid, size);
+				d_newq[V] = node_rank; // or red_mask but red_mask is zero
+				//printf("RANK-%d: vertex %d - Node Rank %d\n", rank, V, node_rank);
+			}
+			else if ((d_pred[V] & COLOR_MASK_64) == COLOR_MASK_64){
+				// FOUND MATCHING NODE
+				if (atomicCAS(d_mn_found, 0, 1) == 0) { // QUI HO UNA SEZIONE CRITICA
+					//exit with two parant rank
+					node_rank_1 = st_binsearch_duplicates(d_recv_offset_per_proc, gid, size); // RANK of RED Predecessor
+					node_rank_2 = d_pred[V] & (~COLOR_MASK_64);   // RANK of BLUE Predecessor
+					d_st_rank[0] = node_rank_1;
+					d_st_rank[1] = node_rank_2;//recv node. Here is local
+					d_st_rank[2] = VERTEX_TO_GLOBAL(V);
+					d_st_rank[3] = VERTEX_TO_GLOBAL(V);
+					//printf( "RED RCV -> matching node %d\n",VERTEX_TO_GLOBAL(V));
+				}
+			}
+			//end critical section (red)
+                        global_lock_red_r = 0;
+			d_cared[V] = 0;
+		}
+		else{ // blue path
+                        if (atomicCAS(&global_lock_blue_r, 0, 1) == 0){
+                                d_cablue[V] = 1;
+                                d_turn[V] = 0;
+                        }
+			while(d_cared[V]== 1 && d_turn[V] == 0 & global_lock_blue_r){
+				count_busy_wait_b++;
+			}
+			//critical section
+			if (d_pred[V] == NO_PREDECESSOR){  // WHEN TESTING AGAINST NO_PREDECESSOR NEVER USE COLOR_MASK
+			//if ((d_pred[V] & (~COLOR_MASK_64) ) == NO_PREDECESSOR){
+				d_pred[V] = TMP_PREDECESSOR;
+				node_rank = st_binsearch_duplicates(d_recv_offset_per_proc, gid, size);
+				//printf("RANK-%d: vertex %d - Node Rank %d - Colored Node Rank %d\n", rank, V, node_rank, node_rank | COLOR_MASK_64);
+				d_newq[V] = node_rank | COLOR_MASK_64;
+
+			}
+			else if ((d_pred[V] & COLOR_MASK_64) == 0){
+				if (atomicCAS(d_mn_found, 0, 1) == 0) { // QUI HO UNA SEZIONE CRITICA
+					node_rank_1 = st_binsearch_duplicates(d_recv_offset_per_proc, gid, size);  // RANK of BLUE Predecessor
+					node_rank_2 = d_pred[V] & (~COLOR_MASK_64);    // RANK of RED Predecessor
+					d_st_rank[0] = node_rank_2;
+					d_st_rank[1] = node_rank_1;//recv node. Here is local
+					d_st_rank[2] = VERTEX_TO_GLOBAL(V);
+					d_st_rank[3] = VERTEX_TO_GLOBAL(V);
+					//printf( "BLUE RCV -> matching node %d\n",VERTEX_TO_GLOBAL(V));
+				}
+			}
+			//end critical section
+			d_cablue[V] = 0;
+                        global_lock_blue_r=0;
+
+		}
+		gid += grid_sz;
+	}
+}
+
+__global__ void k_stcon_dequeue_step_9_recv_2(INT_T* d_newq, INT_T* d_oldq, int64_t* d_pred, INT_T g_nverts,
+		                                INT32_T* d_pverts, INT32_T* d_mask, ATOMIC_T* global_count,
+					                    int rank, int size, int lgsize)
+{
+    /*debug */
+   unsigned int  tid = threadIdx.x;
+   unsigned int  grid_sz = gridDim.x*blockDim.x;
+   unsigned int  gid = blockIdx.x*blockDim.x + tid;
+   ATOMIC_T old_count = 0;
+   INT32_T color[2] = {0, COLOR_MASK};
+   INT32_T label;
+   INT_T vertex_color;
+   while ( gid < g_nverts )
+   {
+      if (d_pred[gid] == TMP_PREDECESSOR)
+      {
+         vertex_color = d_newq[gid] & (COLOR_MASK_64);
+         //printf( "k_dequeue_step_9_recv_2 vertex_color  %ld  d_newq[gid] = %ld\n", vertex_color, d_newq[gid]);
+         d_pred[gid] = d_newq[gid] | vertex_color;  // This is the node rank
+
+
+         old_count = atomicAdd((ATOMIC_T*)&global_count[0], 1);
+         //Vertex is LOCAL in the new queue
+         d_oldq[old_count] = gid; // This is the new queue
+         label = d_pverts[gid];   // Get the label (label will be -1 if vertices does NOT have connections within the same node
+         
+         d_mask[label] = OTHER_RANK | color[(vertex_color == COLOR_MASK_64) ];
+         //printf( "[d_mask k_dequeue]_step_9_recv_2 %d\n",d_mask[label]);
+      }
+
+      gid += grid_sz;
+   }
+}
+
+
+__global__ void k_stcon_remove_pred(int64_t* d_pred, INT_T* d_mask_1, INT_T* d_mask_2, INT_T nelems,
+		                        int rank, int size, int lgsize)
+{
+	unsigned int tid 	 = threadIdx.x;
+	unsigned int grid_sz = gridDim.x*blockDim.x;
+	unsigned int gid 	 = blockIdx.x*blockDim.x + tid;
+	while (gid < nelems) {
+
+		if (d_pred[gid] == NO_PREDECESSOR) {
+			d_mask_1[gid] = NO_PREDECESSOR;
+			d_mask_2[gid] = NO_PREDECESSOR;
+		}
+		else {
+			d_mask_1[gid] = d_pred[gid] & (~COLOR_MASK_64);  // Remove color from the rank
+			d_mask_2[gid] = gid;
+		}
+		d_pred[gid] = NO_PREDECESSOR;
+
+		gid += grid_sz;
+	}
+}
+
+
+__global__ void k_stcon_pred_recv(INT32_T *d_buffer32, INT_T nelems, INT_T* d_recv_offset_per_proc,
+		                        INT_T *d_unique_edges, INT_T *proc_offset, INT32_T *d_pedges, INT32_T* d_mask,
+		                        int rank, int size, int lgsize)
+{
+	unsigned int tid 	 = threadIdx.x;
+	unsigned int grid_sz = gridDim.x*blockDim.x;
+	unsigned int gid 	 = blockIdx.x*blockDim.x + tid;
+
+	INT32_T V, label;
+	INT_T VG, offset, range;
+	int node_rank;
+
+	while (gid < nelems) {
+		V = d_buffer32[gid]; // This is LOCAL
+		//printf("\nk_bfs_pred_recv --- %d\n",V);
+		// Find Node Rank
+		node_rank = st_binsearch_duplicates(d_recv_offset_per_proc, gid, size);
+
+        //V senza colore
+        V = V & (~COLOR_MASK);
+		VG = VERTEX_2_GLOBAL(V, node_rank); // Convert to Global
+
+		offset = proc_offset[node_rank];
+		range = proc_offset[node_rank+1]-proc_offset[node_rank];
+
+		// Find the Global vertex label within the Unique Edges   #?
+		label = st_binsearch(d_unique_edges + offset, VG, range) + offset;
+		//printf( "nk_bfs_pred_recv: d_mask %d\n", d_mask[label]);
+		// Use the label to get the predecessor from the d_mask
+		d_buffer32[gid] = d_mask[label]; // Predecessor (local) // d_buffer get d_mask[label] with color
+		gid += grid_sz;
+	}
+}
+

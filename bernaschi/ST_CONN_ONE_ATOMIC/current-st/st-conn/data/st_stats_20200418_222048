@@ -1,0 +1,8 @@
+SCALE 16
+Edgefactor 16.0
+MPI-Nodes 1
+Num-ST-CON=100
+Filename graphs/streets/europe_osm.mtx.txt.alt
+Seed1 1327913834
+Seed2 808230175
+ST-CON-RUN RED-V BLUE-V DEPTH MN-FOUND TIME(Sec) TEPS

@@ -1,0 +1,1128 @@
+Analyzing amazon0302.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0312.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0505.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0601.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing as-skitter.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-amazon.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-orkut.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::detail::bad_alloc'
+  what():  std::bad_alloc: temporary_buffer::allocate: get_temporary_buffer failed
+Analyzing com-youtube.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing email-EuAll.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Epinions1.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-LiveJournal1.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Slashdot0811.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing wiki-Talk.txt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing asia_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing belgium_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing europe_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::system_error'
+  what():  scan failed on 2nd step: cudaErrorMemoryAllocation: out of memory
+Analyzing germany_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing great-britain_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing italy_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing luxembourg_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing netherlands_osm.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_central.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-CA.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-PA.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-TX.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_usa.mtx.txt.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00000.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00010.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00020.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00000.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00010.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00020.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00000.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00010.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00020.mtx.alt
+THREADS:  128
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0302.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0312.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0505.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0601.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing as-skitter.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-amazon.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-orkut.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::detail::bad_alloc'
+  what():  std::bad_alloc: temporary_buffer::allocate: get_temporary_buffer failed
+Analyzing com-youtube.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing email-EuAll.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Epinions1.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-LiveJournal1.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Slashdot0811.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing wiki-Talk.txt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing asia_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing belgium_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing europe_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::system_error'
+  what():  scan failed on 2nd step: cudaErrorMemoryAllocation: out of memory
+Analyzing germany_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing great-britain_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing italy_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing luxembourg_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing netherlands_osm.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_central.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-CA.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-PA.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-TX.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_usa.mtx.txt.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00000.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00010.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00020.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00000.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00010.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00020.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00000.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00010.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00020.mtx.alt
+THREADS:  256
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0302.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0312.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0505.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0601.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing as-skitter.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-amazon.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-orkut.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::detail::bad_alloc'
+  what():  std::bad_alloc: temporary_buffer::allocate: get_temporary_buffer failed
+Analyzing com-youtube.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing email-EuAll.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Epinions1.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-LiveJournal1.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Slashdot0811.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing wiki-Talk.txt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing asia_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing belgium_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing europe_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::system_error'
+  what():  scan failed on 2nd step: cudaErrorMemoryAllocation: out of memory
+Analyzing germany_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing great-britain_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing italy_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing luxembourg_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing netherlands_osm.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_central.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-CA.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-PA.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-TX.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_usa.mtx.txt.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00000.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00010.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00020.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00000.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00010.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00020.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00000.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00010.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00020.mtx.alt
+THREADS:  512
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0302.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0312.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0505.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing amazon0601.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing as-skitter.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-amazon.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing com-orkut.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::detail::bad_alloc'
+  what():  std::bad_alloc: temporary_buffer::allocate: get_temporary_buffer failed
+Analyzing com-youtube.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing email-EuAll.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Epinions1.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-LiveJournal1.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing soc-Slashdot0811.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing wiki-Talk.txt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing asia_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing belgium_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing europe_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+terminate called after throwing an instance of 'thrust::system::system_error'
+  what():  scan failed on 2nd step: cudaErrorMemoryAllocation: out of memory
+Analyzing germany_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing great-britain_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing italy_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing luxembourg_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing netherlands_osm.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_central.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-CA.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-PA.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing roadNet-TX.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing road_usa.mtx.txt.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00000.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00010.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugebubbles-00020.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00000.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00010.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetrace-00020.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00000.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00010.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
+Analyzing hugetric-00020.mtx.alt
+THREADS:  1024
+rank 0, ** DEVICE MEMORY INFO **
+rank 0, Device memory total: 		2^33.0 (7.792 GB)
+rank 0, Device memory available: 	2^32.9 (7.680 GB)
+rank 0, Device memory already used: 	2^26.8 (0.112 GB)
+rank 0, ** EOF DEVICE MEMORY INFO **
+rank 0: eof
